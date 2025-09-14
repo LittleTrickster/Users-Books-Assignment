@@ -8,7 +8,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
-import androidx.room.Transaction
+import kotlinx.coroutines.flow.Flow
 import java.time.OffsetDateTime
 
 @Entity
@@ -40,22 +40,13 @@ interface FullBookDao {
     @Delete
     fun delete(books: List<FullBook>)
 
+    @Query("SELECT * FROM FullBook WHERE id =:id")
+    fun getByIdFlow(id: Int): Flow<FullBook?>
+
 
     @Query("DELETE FROM FullBook WHERE id NOT IN(:ids)")
     fun deleteNotIn(ids: List<Int>)
 
     @Query("DELETE FROM FullBook")
     fun deleteAll()
-    @Transaction
-    fun replaceAllWith(books: List<FullBook>) {
-        if (books.isEmpty()) {
-            deleteAll()
-            return
-        }
-
-        insert(books)
-
-        val ids = books.map { it.id }
-        deleteNotIn(ids)
-    }
 }

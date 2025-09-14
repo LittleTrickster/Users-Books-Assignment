@@ -1,8 +1,12 @@
 package com.littletrickster.usersbooks
 
+import android.app.Application
 import android.content.Context
 import com.littletrickster.usersbooks.api.BooksApi
 import com.littletrickster.usersbooks.db.Db
+import com.littletrickster.usersbooks.db.models.BookDao
+import com.littletrickster.usersbooks.db.models.BookListDao
+import com.littletrickster.usersbooks.db.models.FullBookDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,13 +23,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object Modules {
 
-
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient
         .Builder()
         .build()
-
 
     @Provides
     @Singleton
@@ -52,14 +54,33 @@ object Modules {
 
     @Provides
     @Singleton
-    fun provideDb(context: Context): Db = Db.make(context)
+    fun provideDb(context: Application): Db = Db.make(context)
 
-//    @Provides
-//    @Singleton
-//    fun provideDb(db: Db): Db = db
+    @Provides
+    @Singleton
+    fun provideBookDao(db: Db): BookDao = db.bookDao()
 
+    @Provides
+    @Singleton
+    fun provideStatusDao(db: Db): BookListDao = db.statusDao()
 
+    @Provides
+    @Singleton
+    fun provideFullBookDao(db: Db): FullBookDao = db.fullBookDao()
 
+    @Provides
+    @Singleton
+    fun provideLibraryRepo(
+        booksApi: BooksApi,
+        bookDao: BookDao,
+        bookListDao: BookListDao,
+        fullBookDao: FullBookDao
+    ): LibraryRepo = LibraryRepo(
+        booksApi = booksApi,
+        bookDao = bookDao,
+        bookListDao = bookListDao,
+        fullBookDao = fullBookDao
+    )
 
 
 }

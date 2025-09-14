@@ -15,7 +15,6 @@ import javax.inject.Inject
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-
         SingletonImageLoader.setSafe {
             ImageLoader.Builder(this)
                 .crossfade(true)
