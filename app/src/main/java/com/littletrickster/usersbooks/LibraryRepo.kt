@@ -13,6 +13,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import retrofit2.HttpException
 import kotlin.collections.map
 
 class LibraryRepo(
@@ -38,7 +39,7 @@ class LibraryRepo(
     fun booksByListId(listId: Int) = bookDao.getAllBooksByListIdFlow(listId)
     fun fullBookById(id: Int) = fullBookDao.getByIdFlow(id)
 
-    fun listById(id:Int) = bookListDao.getById(id)
+    fun listById(id: Int) = bookListDao.getById(id)
 
     suspend fun fetchBooksAndLists(): Unit = coroutineScope {
         val booksJob = async {
@@ -61,7 +62,14 @@ class LibraryRepo(
     }
 
     suspend fun fetchFullBook(id: Int): Boolean {
-        val book = booksApi.getFullBook(id) ?: return false
+        val book = try {
+            booksApi.getFullBook(id) ?: return false
+        } catch (e: HttpException) {
+            if (e.code() == 404) return false
+            else throw e
+        }
+
+
         val fullBook = FullBook(
             id = book.id,
             listId = book.listId,
