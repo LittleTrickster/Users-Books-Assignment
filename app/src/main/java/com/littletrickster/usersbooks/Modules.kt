@@ -1,7 +1,6 @@
 package com.littletrickster.usersbooks
 
 import android.app.Application
-import android.content.Context
 import com.littletrickster.usersbooks.api.BooksApi
 import com.littletrickster.usersbooks.db.Db
 import com.littletrickster.usersbooks.db.models.BookDao
@@ -11,6 +10,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -22,6 +22,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object Modules {
+
+    @Provides
+    @Singleton
+    fun providesDispatchers(): AppDispatchers {
+        return object : AppDispatchers {
+            override val Main = Dispatchers.Main
+            override val IO = Dispatchers.IO
+            override val Default = Dispatchers.Default
+        }
+    }
+
 
     @Provides
     @Singleton
@@ -62,7 +73,7 @@ object Modules {
 
     @Provides
     @Singleton
-    fun provideStatusDao(db: Db): BookListDao = db.statusDao()
+    fun provideStatusDao(db: Db): BookListDao = db.listsDao()
 
     @Provides
     @Singleton

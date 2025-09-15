@@ -17,7 +17,7 @@ import com.littletrickster.usersbooks.db.models.BookListDao
 abstract class Db : RoomDatabase() {
 
     abstract fun bookDao(): BookDao
-    abstract fun statusDao(): BookListDao
+    abstract fun listsDao(): BookListDao
     abstract fun fullBookDao(): FullBookDao
 
     companion object {

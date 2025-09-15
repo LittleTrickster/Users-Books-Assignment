@@ -5,11 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.littletrickster.usersbooks.AllScreen
-import com.littletrickster.usersbooks.FullBookScreen
+import com.littletrickster.usersbooks.AppDispatchers
 import com.littletrickster.usersbooks.LibraryRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +25,8 @@ import javax.inject.Inject
 class ListViewModel
 @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val libraryRepo: LibraryRepo
+    private val libraryRepo: LibraryRepo,
+    private val appDispatchers: AppDispatchers
 ) : ViewModel() {
 
     private val listId: Int = savedStateHandle.toRoute<AllScreen>().listId
@@ -76,7 +76,7 @@ class ListViewModel
         _state.update {
             it.copy(isLoading = true)
         }
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(appDispatchers.IO) {
             try {
                 libraryRepo.fetchBooksAndLists()
             } catch (e: Exception) {
@@ -86,7 +86,7 @@ class ListViewModel
                     _effects.tryEmit(ListScreenEffect.Error(it))
                 }
             } finally {
-                withContext(Dispatchers.Main) {
+                withContext(appDispatchers.Main) {
                     _state.update {
                         it.copy(isLoading = false)
                     }

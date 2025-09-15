@@ -23,6 +23,7 @@ sealed class BookScreenEffect {
 data class BooksScreenState(
     val isLoading: Boolean = false,
     val typeAndBooks: List<ListIdTitleBooks> = emptyList(),
+    val refreshTimes: Int = 0
 )
 
 

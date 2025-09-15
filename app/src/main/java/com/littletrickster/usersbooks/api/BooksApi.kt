@@ -6,7 +6,7 @@ import com.littletrickster.usersbooks.api.models.BookList
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface BooksApi {
+interface BooTksApi {
     @GET("assignment/books")
     suspend fun getBooks(): List<Book>
 

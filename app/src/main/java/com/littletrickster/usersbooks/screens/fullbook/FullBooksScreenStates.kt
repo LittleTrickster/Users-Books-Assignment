@@ -18,5 +18,6 @@ sealed class FullBookScreenEffect {
 
 data class FullBookScreenState(
     val isLoading: Boolean = false,
-    val book: FullBook? = null
+    val book: FullBook? = null,
+    val refreshTimes: Int = 0
 )

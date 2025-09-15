@@ -33,7 +33,7 @@ data class BookWithListTitle(
 @Dao
 interface BookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg nr: Book)
+    fun insert(vararg book: Book)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(list: List<Book>)

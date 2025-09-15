@@ -43,6 +43,8 @@ interface FullBookDao {
     @Query("SELECT * FROM FullBook WHERE id =:id")
     fun getByIdFlow(id: Int): Flow<FullBook?>
 
+    @Query("SELECT * FROM FullBook")
+    fun all(): Flow<List<FullBook>>
 
     @Query("DELETE FROM FullBook WHERE id NOT IN(:ids)")
     fun deleteNotIn(ids: List<Int>)
