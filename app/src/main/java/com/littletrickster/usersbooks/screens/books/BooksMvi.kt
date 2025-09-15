@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
@@ -30,9 +31,15 @@ fun BooksMviLink(
         }
     }
 
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(null) {
+        if (state.refreshTimes == 0) viewModel.onAction(BooksScreenAction.Refresh)
+    }
+
 
     BooksMviLink(
-        state = viewModel.state.collectAsState().value,
+        state = state,
         onAction = viewModel::onAction
     )
 

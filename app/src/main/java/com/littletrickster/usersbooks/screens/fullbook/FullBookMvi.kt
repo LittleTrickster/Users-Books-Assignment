@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -29,18 +30,21 @@ fun FullBookMviLink(
         viewModel.effects.collect { effect ->
             when (effect) {
                 FullBookScreenEffect.Back -> navController.popBackStack()
-                is FullBookScreenEffect.Error -> Toast.makeText(
-                    context,
-                    effect.string,
-                    Toast.LENGTH_SHORT
-                ).show()
+                is FullBookScreenEffect.Error ->
+                    Toast.makeText(context, effect.string, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
 
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(null) {
+        if (state.refreshTimes == 0) viewModel.onAction(FullBookScreenAction.Refresh)
+    }
+
     FullBookMviLink(
-        state = viewModel.state.collectAsState().value,
+        state = state,
         onAction = viewModel::onAction
     )
 
