@@ -146,15 +146,15 @@ private fun FullBookColumn(
 
                 )
             Text(
-                text = author,
+                text = "Author: $author",
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
                 )
             Text(
-                text = bookListStatus,
+                text = "Status: $bookListStatus",
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
                 )
             Text(
-                text = isbn,
+                text = "ISBN: $isbn",
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
 
                 )

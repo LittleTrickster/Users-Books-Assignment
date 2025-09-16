@@ -49,12 +49,12 @@ class FullSystemTestWithMockApi {
 
         // Wait until details load
         composeRule.waitUntil(timeoutMillis = 10_000) {
-            composeRule.onAllNodesWithText("Frank Herbert").fetchSemanticsNodes().isNotEmpty()
+            composeRule.onAllNodesWithText("Frank Herbert", substring = true).fetchSemanticsNodes().isNotEmpty()
         }
 
         // Assert details
-        composeRule.onNodeWithText("Frank Herbert").assertIsDisplayed()
-        composeRule.onNodeWithText("0441013597").assertIsDisplayed()
+        composeRule.onNodeWithText("Frank Herbert", substring = true).assertIsDisplayed()
+        composeRule.onNodeWithText("0441013597", substring = true).assertIsDisplayed()
 
         // Going back
         composeRule.onNodeWithContentDescription("backIcon").performClick()
@@ -79,10 +79,10 @@ class FullSystemTestWithMockApi {
 
         // Wait until loads
         composeRule.waitUntil(timeoutMillis = 10_000) {
-            composeRule.onAllNodesWithText("The Hitchhikers Guide to the Galaxy")
+            composeRule.onAllNodesWithText("The Hitchhikers Guide to the Galaxy", substring = true)
                 .fetchSemanticsNodes().isNotEmpty()
         }
-        composeRule.onNodeWithText("Reading").assertIsDisplayed()
+        composeRule.onNodeWithText("Reading", substring = true).assertIsDisplayed()
 
     }
 }
