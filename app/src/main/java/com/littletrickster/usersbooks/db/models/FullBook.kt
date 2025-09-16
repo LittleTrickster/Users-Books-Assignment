@@ -3,6 +3,7 @@ package com.littletrickster.usersbooks.db.models
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -24,6 +25,11 @@ data class FullBook(
     val title: String,
     val img: String,
     val description: String
+)
+
+data class FullBookWithListTitle(
+    @Embedded val book: FullBook,
+    @ColumnInfo(name = "list_title") val listTitle: String?
 )
 
 @Dao
@@ -51,4 +57,17 @@ interface FullBookDao {
 
     @Query("DELETE FROM FullBook")
     fun deleteAll()
+
+
+
+    @Query(
+        """
+    SELECT b.id, b.list_id, b.isbn, b.publication_date, b.author, b.title, b.img, b.description,
+           s.title AS list_title
+    FROM FullBook b
+    LEFT JOIN BookList s ON s.id = b.list_id
+    WHERE b.id = :id
+    """
+    )
+    fun getBookWithTitleById(id: Int): Flow<FullBookWithListTitle?>
 }

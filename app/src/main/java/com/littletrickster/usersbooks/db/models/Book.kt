@@ -84,7 +84,7 @@ interface BookDao {
     WHERE b.id = :id
     """
     )
-    fun getBookWithTitleById(id: Long): Flow<BookWithListTitle?>
+    fun getBookWithTitleById(id: Int): Flow<BookWithListTitle?>
 
 
 

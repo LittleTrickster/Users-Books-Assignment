@@ -38,6 +38,7 @@ fun FullBookMain(
     isbn: String = "",
     date: String = "",
     description: String = "",
+    bookListStatus: String = "",
     image: String? = "",
     onBack: () -> Unit = {},
     isRefreshing: Boolean = false,
@@ -78,6 +79,7 @@ fun FullBookMain(
                 author = author,
                 isbn = isbn,
                 date = date,
+                bookListStatus = bookListStatus,
                 description = description,
                 image = image
             )
@@ -93,6 +95,7 @@ private fun FullBookPreview() {
         author = "Author",
         isbn = "isbn",
         date = "2025-09-14",
+        bookListStatus = "Read",
         description = "description"
     )
 }
@@ -105,6 +108,7 @@ private fun FullBookColumn(
     author: String = "",
     isbn: String = "",
     date: String = "",
+    bookListStatus: String = "",
     description: String = "",
     image: String? = ""
 ) {
@@ -144,7 +148,10 @@ private fun FullBookColumn(
             Text(
                 text = author,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
-
+                )
+            Text(
+                text = bookListStatus,
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
                 )
             Text(
                 text = isbn,
@@ -175,6 +182,7 @@ private fun FullBookColumnPreview() {
         author = "Author",
         isbn = "isbn",
         date = "2025-09-14",
+        bookListStatus = "Read",
         description = "description"
     )
 }

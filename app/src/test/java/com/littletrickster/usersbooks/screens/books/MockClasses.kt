@@ -8,6 +8,7 @@ import com.littletrickster.usersbooks.db.models.BookListDao
 import com.littletrickster.usersbooks.db.models.BookWithListTitle
 import com.littletrickster.usersbooks.db.models.FullBook
 import com.littletrickster.usersbooks.db.models.FullBookDao
+import com.littletrickster.usersbooks.db.models.FullBookWithListTitle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -61,8 +62,8 @@ class InMemoryBookDao : BookDao {
 
     override fun getBooksWithTitles(limit: Int): Flow<List<BookWithListTitle>> = booksWithTitlesFlow
 
-    override fun getBookWithTitleById(id: Long): Flow<BookWithListTitle?> =
-        MutableStateFlow(booksWithTitlesFlow.value.firstOrNull { it.book.id.toLong() == id })
+    override fun getBookWithTitleById(id: Int): Flow<BookWithListTitle?> =
+        MutableStateFlow(booksWithTitlesFlow.value.firstOrNull { it.book.id == id })
 }
 
 class InMemoryBookListDao : BookListDao {
@@ -147,6 +148,10 @@ class InMemoryFullBookDao : FullBookDao {
     override fun deleteAll() {
         books.clear()
         flow.value = books
+    }
+
+    override fun getBookWithTitleById(id: Int): Flow<FullBookWithListTitle?> = flow.map {
+        it.firstOrNull { it.id == id }?.let { FullBookWithListTitle(it, "Read") }
     }
 }
 

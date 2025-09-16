@@ -88,8 +88,8 @@ class FullBookViewModelTest {
 
         assertFalse("should not be loading after refresh completes", state.isLoading)
 
-        assertNotNull(state.book)
-        assertEquals(1, state.book!!.id)
+        assertNotNull(state.fullBookWithListTitle)
+        assertEquals(1, state.fullBookWithListTitle!!.book.id)
     }
 
     @Test

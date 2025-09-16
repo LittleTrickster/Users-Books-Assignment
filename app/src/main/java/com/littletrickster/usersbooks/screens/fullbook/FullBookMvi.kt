@@ -50,7 +50,9 @@ fun FullBookMviLink(
     state: FullBookScreenState,
     onAction: (FullBookScreenAction) -> Unit,
 ) {
-    val book = state.book
+    val bookAndStatus = state.fullBookWithListTitle
+    val book = bookAndStatus?.book
+    val bookListState = bookAndStatus?.listTitle
 
     val formatter = remember { DateTimeFormatter.ofPattern("yyyy-MM-dd") }
     val formattedDate =
@@ -63,6 +65,7 @@ fun FullBookMviLink(
         author = book?.author ?: "",
         isbn = book?.isbn ?: "",
         date = formattedDate ?: "",
+        bookListStatus = bookListState ?: "",
         description = book?.description ?: "",
         image = book?.img,
         isRefreshing = state.isLoading,

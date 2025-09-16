@@ -38,6 +38,7 @@ class LibraryRepo(
 
     fun booksByListId(listId: Int) = bookDao.getAllBooksByListIdFlow(listId)
     fun fullBookById(id: Int) = fullBookDao.getByIdFlow(id)
+    fun fullBookByIdWithTitle(id: Int) = fullBookDao.getBookWithTitleById(id)
 
     fun listById(id: Int) = bookListDao.getById(id)
 

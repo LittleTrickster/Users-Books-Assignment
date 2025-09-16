@@ -1,6 +1,6 @@
 package com.littletrickster.usersbooks.screens.fullbook
 
-import com.littletrickster.usersbooks.db.models.FullBook
+import com.littletrickster.usersbooks.db.models.FullBookWithListTitle
 
 
 sealed class FullBookScreenAction {
@@ -18,6 +18,6 @@ sealed class FullBookScreenEffect {
 
 data class FullBookScreenState(
     val isLoading: Boolean = false,
-    val book: FullBook? = null,
+    val fullBookWithListTitle: FullBookWithListTitle? = null,
     val refreshTimes: Int = 0
 )

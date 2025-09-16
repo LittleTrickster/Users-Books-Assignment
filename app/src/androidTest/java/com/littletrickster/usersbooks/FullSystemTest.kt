@@ -31,12 +31,13 @@ class FullSystemTest {
     @Before fun setUp() { hilt.inject() }
 
     @Test
-    fun list_to_details_real_backend_displays_full_book() {
+    fun full_system_test() {
         // Books screen shows data
         composeRule.waitUntil(timeoutMillis = 10_000) {
             composeRule.onAllNodesWithText("Dune").fetchSemanticsNodes().isNotEmpty()
         }
         composeRule.onNodeWithText("The Hitchhikers Guide to the Galaxy").assertIsDisplayed()
+        composeRule.onNodeWithText("Reading").assertIsDisplayed()
 
         // Navigate to FullBook
         composeRule.onNodeWithText("Dune").performClick()
@@ -67,7 +68,17 @@ class FullSystemTest {
                 .fetchSemanticsNodes().isNotEmpty()
         }
 
+
+        //Navigate to FullBook from list
         composeRule.onAllNodesWithText("The Hitchhikers Guide to the Galaxy")[0].performClick()
+
+        // Wait until loads
+        composeRule.waitUntil(timeoutMillis = 10_000) {
+            composeRule.onAllNodesWithText("The Hitchhikers Guide to the Galaxy")
+                .fetchSemanticsNodes().isNotEmpty()
+        }
+        composeRule.onNodeWithText("Reading").assertIsDisplayed()
+
     }
 
 }

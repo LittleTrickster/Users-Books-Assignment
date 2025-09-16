@@ -130,6 +130,18 @@ class FakeBooksApi : BooksApi {
 }"""
         ).also { full[it.id] = it }
 
+        json.decodeFromString<FullBook>(
+            """{
+  "id": 10,
+  "list_id": 1,
+  "isbn": "0330437984",
+  "publication_date": "2005-04-01T00:00:00+03:00",
+  "author": "Douglas Adams",
+  "title": "The Hitchhikers Guide to the Galaxy",
+  "img": "https://covers.openlibrary.org/b/id/11464688-L.jpg",
+  "description": "The Hitchhiker's Guide to the Galaxy is the first of six books in the Hitchhiker's Guide to the Galaxy comedy science fiction \"hexalogy\" by Douglas Adams. The novel is an adaptation of the first four parts of Adams's radio series of the same name. The novel was first published in London on 12 October 1979. It sold 250,000 copies in the first three months."
+}"""
+        ).also { full[it.id] = it }
 
     }
 }

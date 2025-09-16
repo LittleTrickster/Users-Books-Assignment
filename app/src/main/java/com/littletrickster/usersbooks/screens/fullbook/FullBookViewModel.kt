@@ -53,14 +53,15 @@ class FullBookViewModel
     }
 
     private fun observeBooks() {
-        libraryRepo.fullBookById(bookId)
+        libraryRepo.fullBookByIdWithTitle(bookId)
             .onEach { new ->
                 _state.update { current ->
-                    current.copy(book = new)
+                    current.copy(fullBookWithListTitle = new)
                 }
             }
             .launchIn(viewModelScope)
     }
+
 
 
     private fun refresh() {
