@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.littletrickster.usersbooks.db.Db
-import com.littletrickster.usersbooks.db.OffsetDateTimeConverter
 import com.littletrickster.usersbooks.db.models.Book
 import com.littletrickster.usersbooks.db.models.BookDao
 import com.littletrickster.usersbooks.db.models.BookList

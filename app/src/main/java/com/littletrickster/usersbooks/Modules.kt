@@ -59,13 +59,8 @@ object Modules {
         .build()
 
 
-    @Provides
-    @Singleton
-    fun provideBooksApi(retrofit: Retrofit): BooksApi = retrofit.create<BooksApi>()
 
-    @Provides
-    @Singleton
-    fun provideDb(context: Application): Db = Db.make(context)
+
 
     @Provides
     @Singleton
@@ -94,4 +89,21 @@ object Modules {
     )
 
 
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object ApiModules {
+    @Provides
+    @Singleton
+    fun provideBooksApi(retrofit: Retrofit): BooksApi = retrofit.create<BooksApi>()
+}
+
+
+@Module
+@InstallIn(SingletonComponent::class)
+object DbModule {
+    @Provides
+    @Singleton
+    fun provideDb(context: Application): Db = Db.make(context)
 }

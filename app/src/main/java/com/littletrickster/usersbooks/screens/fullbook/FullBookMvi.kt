@@ -8,14 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-
 import androidx.navigation.NavController
-import com.littletrickster.usersbooks.AllScreen
-import com.littletrickster.usersbooks.FullBookScreen
-import com.littletrickster.usersbooks.screens.books.BookScreenEffect
-import com.littletrickster.usersbooks.screens.books.BooksMain
-import com.littletrickster.usersbooks.screens.books.BooksScreenAction
-import com.littletrickster.usersbooks.screens.books.BooksScreenState
+import com.littletrickster.usersbooks.screens.safePopBackStack
 import java.time.format.DateTimeFormatter
 
 
@@ -29,7 +23,7 @@ fun FullBookMviLink(
     LaunchedEffect(viewModel.effects) {
         viewModel.effects.collect { effect ->
             when (effect) {
-                FullBookScreenEffect.Back -> navController.popBackStack()
+                FullBookScreenEffect.Back -> navController.safePopBackStack()
                 is FullBookScreenEffect.Error ->
                     Toast.makeText(context, effect.string, Toast.LENGTH_SHORT).show()
             }

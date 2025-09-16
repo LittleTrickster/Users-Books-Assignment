@@ -21,7 +21,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.littletrickster.usersbooks.CustomTestRunner"
     }
 
     buildTypes {
@@ -70,6 +71,7 @@ dependencies {
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.57.1")
 
 
 

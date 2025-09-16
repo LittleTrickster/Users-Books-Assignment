@@ -130,11 +130,6 @@ class FullBookViewModelTest {
         val msg = (effect as FullBookScreenEffect.Error).string
         assertEquals("boom", msg)
 
-        val handle2 = SavedStateHandle()
-        every { handle2.toRoute<FullBookScreen>() } returns FullBookScreen(id = 2)
-
-        val vm2 = FullBookViewModel(handle, repo, testDispatchers)
-
 
     }
 

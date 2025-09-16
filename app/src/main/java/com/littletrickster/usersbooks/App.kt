@@ -8,11 +8,12 @@ import coil3.disk.directory
 import coil3.memory.MemoryCache
 import coil3.request.crossfade
 import dagger.hilt.android.HiltAndroidApp
-import okhttp3.OkHttpClient
-import javax.inject.Inject
+
 
 @HiltAndroidApp
-class App : Application() {
+class App : BaseApp()
+
+open class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         SingletonImageLoader.setSafe {

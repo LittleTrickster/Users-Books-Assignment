@@ -1,14 +1,11 @@
 package com.littletrickster.usersbooks
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import com.littletrickster.usersbooks.screens.books.BooksMviLink
 import com.littletrickster.usersbooks.screens.fullbook.FullBookMviLink
 import com.littletrickster.usersbooks.screens.list.ListMviLink

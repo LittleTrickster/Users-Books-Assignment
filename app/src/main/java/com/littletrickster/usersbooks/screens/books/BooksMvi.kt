@@ -11,6 +11,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.littletrickster.usersbooks.AllScreen
 import com.littletrickster.usersbooks.FullBookScreen
+import com.littletrickster.usersbooks.screens.safePopBackStack
 
 
 @Composable
@@ -24,7 +25,7 @@ fun BooksMviLink(
         viewModel.effects.collect { effect ->
             when(effect){
                 is BookScreenEffect.Error -> Toast.makeText(context, effect.string, Toast.LENGTH_SHORT).show()
-                BookScreenEffect.Back -> navController.popBackStack()
+                BookScreenEffect.Back -> navController.safePopBackStack()
                 is BookScreenEffect.ChangeBook -> navController.navigate(FullBookScreen(effect.book.id))
                 is BookScreenEffect.ShowAll -> navController.navigate(AllScreen(effect.listId))
             }

@@ -44,7 +44,7 @@ fun FullBookMain(
     onRefresh: () -> Unit = {}
 ) {
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
                 title = {
