@@ -10,7 +10,7 @@ data class FullBook(
     val id: Int,
     @SerialName("list_id")
     val listId: Int,
-    val isbn: String,
+    val isbn: String? = null,
     @SerialName("publication_date")
     @Serializable(with = OffsetDateTimeSerializer::class)
     val publicationDate: OffsetDateTime,

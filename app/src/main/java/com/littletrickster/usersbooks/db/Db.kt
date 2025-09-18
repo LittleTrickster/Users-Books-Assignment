@@ -13,7 +13,7 @@ import com.littletrickster.usersbooks.db.models.BookList
 import com.littletrickster.usersbooks.db.models.BookListDao
 
 @TypeConverters(OffsetDateTimeConverter::class)
-@Database(entities = [Book::class, FullBook::class, BookList::class], version = 1)
+@Database(entities = [Book::class, FullBook::class, BookList::class], version = 2)
 abstract class Db : RoomDatabase() {
 
     abstract fun bookDao(): BookDao

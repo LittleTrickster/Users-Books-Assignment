@@ -18,7 +18,7 @@ data class FullBook(
     val id: Int,
     @ColumnInfo("list_id")
     val listId: Int,
-    val isbn: String,
+    val isbn: String? = null,
     @ColumnInfo("publication_date")
     val publicationDate: OffsetDateTime,
     val author: String,
